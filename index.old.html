@@ -1,0 +1,66 @@
+<html>
+<!--	<script src="jquery-1.8.2.min.js" type="text/javascript"></script> -->
+<body>
+	<h1>TEST</h1>
+	<p>Das ist nur ein <a onclick="test()" href="#">Test</a>. Einfach nicht beachten!</p>
+	<p>nachfoldend nun ein paar Audio-Playlisten:
+		<ul>
+			<li><a href="./relative.m3u">Relativ</a></li>
+			<li><a href="./absolute.m3u">Absolut</a></li>
+		</ul>
+	</p>
+	<div id="test">
+
+	</div>
+<script type="text/javascript">
+var files;
+var test = function() {
+	var parse = function(data, status) {
+		files = data.split('\n');
+		var target = document.getElementById('test');
+		//target.children().remove();
+		var text = '<ul>';
+		for (var i=0;i<files.length;i++) {
+			var url = files[i];
+			if (url) {
+				var parts = url.split('/');
+		                var name = parts[parts.length-1];
+//				url = parts[0];
+//				for (var j=1; j<parts.length-1;j++) {
+//					url += '/'+escape(parts[j]);
+//				}
+				if(!fileRemoved(url)) {
+					text += getTagsText(url, name);
+				} else { console.log(url); }
+			}
+		}
+		text += '</ul>';
+		target.innerHTML = text;
+
+	}
+	var getTagsText = function(url, name) {
+		var text = '<li></label><audio controls="controls"><source src="';
+		text += url;
+		text += '" type="audio/ogg" preload="metadata"></audio><label>';
+		text += '<a href="'+url+'" target="_blank">';
+		text += name;
+		text += '</a></label></li>';
+		return text;
+	}
+	function fileRemoved(url) {
+		var http = new XMLHttpRequest();
+		http.open('HEAD', url, false);
+		http.send();
+		return http.status==404;
+	}
+//	var request = jQuery.ajax('relative.m3u', {'success' : parse});
+	var request = new XMLHttpRequest();
+	request.open('GET','relative.m3u', false)
+	request.send();
+	if (request.status == 200) {
+		parse(request.responseText, request.status);
+	}
+}
+</script>
+</body>
+</html>
