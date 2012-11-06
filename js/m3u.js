@@ -22,6 +22,22 @@ var m3u = function(targetID, m3uPath, sequential) {
                         text += '<a href="#" onclick="m3u.gotoFile('+(i+1)+')">&gt;</a>';
                 }
 		text += '</div>';
+		text += this.drawList(i);
+		return text;
+	}
+	m3u.drawList = function(i) {
+		var text = '<ol class="playlist">'
+		for (var j=0;j<files.length;j++) {
+			if (files[j]) {
+				var name = this.getFilename(j);
+				if (i==j) {
+					text += '<li class="active">'+name+'</li>';
+				} else {
+					text += '<li class="inactive" onclick="m3u.gotoFile('+(j)+')">'+name+'</li>';
+				}
+			}
+		}
+		text += '</ol>';
 		return text;
 	}
 	m3u.cleanupFiles = function() {
@@ -44,11 +60,14 @@ var m3u = function(targetID, m3uPath, sequential) {
 		var target = document.getElementById(targetID);
                 target.innerHTML = this.drawOne(this.current_file)+this.drawControls(this.current_file);
 	}
+	m3u.getFilename = function(i) {
+		var parts = files[i].split('/');
+                return parts[parts.length-1];
+	}
 	m3u.drawOne = function(i) {
 		var url = files[i];
                 if (url) {
-			var parts = url.split('/');
-	                var name = parts[parts.length-1];
+	                var name = this.getFilename(i);
 //                      url = parts[0];
 //                      for (var j=1; j<parts.length-1;j++) {
 //                      	url += '/'+escape(parts[j]);
