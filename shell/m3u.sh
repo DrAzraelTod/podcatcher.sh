@@ -13,6 +13,9 @@ find . -type f \
 	-and -not -name "*.html" \
 	-and -not -name "*.js" \
 	-and -not -name "*.swp" \
+        -and -not -path "*/.git/*" \
+	-and -not -name "*.sh" \
+	-and -not -name "*.md" \
 	> "$list.m3u"
 wc -l "$list.m3u"
 popd 2>&1 >/dev/null

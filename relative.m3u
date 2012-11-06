@@ -1,56 +1,5 @@
 ./sonst/Politikum - Das Meinungsmagazin im WDR 5-Radio zum Mitnehmen/wdr5_politikum_20121105.mp3
 ./musik/AVICII - LEVELS PODCAST/AVICII_LEVELS_-_EPISODE_008.m4a
-./shell/podget.sh
-./shell/m3u.sh
-./shell/podcasts.sh
-./shell/update_playlists.sh
-./.git/hooks/pre-commit.sample
-./.git/hooks/update.sample
-./.git/hooks/pre-applypatch.sample
-./.git/hooks/applypatch-msg.sample
-./.git/hooks/post-update.sample
-./.git/hooks/commit-msg.sample
-./.git/hooks/post-commit.sample
-./.git/hooks/pre-rebase.sample
-./.git/hooks/prepare-commit-msg.sample
-./.git/hooks/post-receive.sample
-./.git/config
-./.git/HEAD
-./.git/index
-./.git/info/exclude
-./.git/refs/heads/master
-./.git/refs/remotes/origin/master
-./.git/refs/remotes/origin/HEAD
-./.git/description
-./.git/objects/d3/e45bf0b1988fa78ceb35760c2a6b4068b839d1
-./.git/objects/3d/4941ebc246edcf411008b9032d9376123a7dcf
-./.git/objects/0b/9f14978ee9147491fec71733aa460a9db46d22
-./.git/objects/b4/6ec9ff0820f1520ad061609d6deeb718bf04ad
-./.git/objects/ca/beedab2e80aeffb0b177ffb415ca8ac1028029
-./.git/objects/db/e680ac43b12486268e52d61e8578e8b50911a6
-./.git/objects/04/b027291a3f567045fe9aed4b481cd76813e709
-./.git/objects/99/8ceeaa1f65393eb0431375833ccce6c20e4bce
-./.git/objects/17/dde85fffe68db15dab8af696e75149a427c73d
-./.git/objects/a9/bd0fc27653235a8ebe6e12a6d5fdea9ca05edf
-./.git/objects/f6/e43a3eb6f759c2514273068ffe8d73dfb065f5
-./.git/objects/c3/349cfd0bb931c0f00bf1648e993847b603f5e7
-./.git/objects/61/e058b23483803c259b789060c9b609bbf63efb
-./.git/objects/78/95e7b2405ef7651e254923513774c827d6778f
-./.git/objects/2e/9da1bc503f4d5f26029c2868bd5638704a35b7
-./.git/objects/02/9b1afb03b8bf42033cc923030a6aa427a1db63
-./.git/objects/b0/eeb518949ef535f1859adb731be1f17efea108
-./.git/objects/ae/2764b7458316b766962beb5e46da7a6cd412d4
-./.git/objects/ae/a63f052861b9f575693db1356515b26c5d64c0
-./.git/objects/9f/37dabec1fdba58dff3fbd114bd38a98662289c
-./.git/objects/09/ec6234dbeed6a739d2c2ccb7b0560cd2267874
-./.git/objects/3f/5e52c3584a6c992bc901e284a5f3bba22b6945
-./.git/objects/pack/pack-a18160eca67baeb770b5e2d9745301acc06f033a.pack
-./.git/objects/pack/pack-a18160eca67baeb770b5e2d9745301acc06f033a.idx
-./.git/logs/HEAD
-./.git/logs/refs/heads/master
-./.git/logs/refs/remotes/origin/master
-./.git/COMMIT_EDITMSG
-./.git/packed-refs
 ./ccc/CRE Technik Kultur Gesellschaft/cre173_rollenspiele.mp3
 ./ccc/CRE Technik Kultur Gesellschaft/cre180_passivhaeuser.mp3
 ./ccc/CRE Technik Kultur Gesellschaft/cre188-telecomix.mp3
@@ -108,4 +57,3 @@
 ./ÖR/dradio-Hintergrund/dlf_20121102_1840_694b7517.mp3
 ./ÖR/dradio-Hintergrund/dlf_20121104_1840_992751c4.mp3
 ./ÖR/dradio-Hintergrund/dlf_20121105_1840_02dbb435.mp3
-./README.md
