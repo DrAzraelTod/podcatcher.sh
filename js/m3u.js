@@ -14,11 +14,12 @@ var m3u = function(targetID, m3uPath, sequential) {
 	}
 	m3u.drawControls = function(i) {
 		var text = '<div class="control">'; 
-		if (i < files.length-1) {
-			text += '<a href="#" onclick="m3u.gotoFile('+i+1+')">&gt;</a>';
-		}
 		if (i > 0) {
-                        text +='<a href="#" onclick="m3u.gotoFile('+i-1+')">&lt;</a>';
+                        text +='<a href="#" onclick="m3u.gotoFile('+(i-1)+')">&lt;</a>';
+                }
+		text += '&nbsp;<span class="help">Datei '+(i+1)+' von '+files.length+'</span>&nbsp;'
+		if (i < files.length-1) {
+                        text += '<a href="#" onclick="m3u.gotoFile('+(i+1)+')">&gt;</a>';
                 }
 		text += '</div>';
 		return text;
@@ -28,7 +29,7 @@ var m3u = function(targetID, m3uPath, sequential) {
 		for (var i =0; i<files.length; i++) 
 		{
 			if (files[i]) {
-				fn+=files[i];
+				fn[fn.length] =files[i];
 			} else {
 				if (this.current_file>=i) {
 					this.current_file--;
