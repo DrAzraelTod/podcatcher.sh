@@ -65,6 +65,7 @@ var m3u = function(targetID, m3uPath, sequential) {
                 return parts[parts.length-1];
 	}
 	m3u.drawOne = function(i) {
+
 		var url = files[i];
                 if (url) {
 	                var name = this.getFilename(i);
@@ -86,7 +87,7 @@ var m3u = function(targetID, m3uPath, sequential) {
 	m3u.drawAll = function() {
                 var text = '<ul>';
                 for (var i=0;i<files.length;i++) {
-                	text += '<li>'+drawOne(i)+'</li>';
+                	text += '<li>'+this.drawOne(i)+'</li>';
                 }
 		text += '</ul>';
 		return text;
