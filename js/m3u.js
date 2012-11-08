@@ -110,9 +110,11 @@ var m3u = function(targetID, m3uPath, sequential) {
 		return text;
 	}
 	m3u.getPlayerText = function(url, name, type, id) {
-		var text = '<audio id="audio_'+id+'" controls="controls">';
+		var tag = (type.substring(0,5).toLowerCase() == 'video') ? 'video' : 'audio';
+		var text;
+		text = '<'+tag+' id="media_'+id+'" controls="controls">';
 		text += '<source src="'+url+'" type="'+type+'" ';
-		text += 'preload="metadata" /></audio>';
+		text += 'preload="metadata" /></'+tag+'>';
 		text += '<label><a href="'+url+'" target="_blank">';
 		text += name;
 		text += '</a></label>';
