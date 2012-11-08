@@ -64,7 +64,7 @@ var m3u = function(targetID, m3uPath, sequential) {
 		this.cleanupFiles();
 		var target = document.getElementById(targetID);
                 target.innerHTML = this.drawOne(this.current_file)+this.drawControls(this.current_file);
-		var player = document.getElementById('audio_'+i);
+		var player = document.getElementById('media_'+i);
 		if (player) {
 			if (i+1 < files.length) {
 				player.addEventListener('ended', function() {m3u.gotoFile(i+1)});
