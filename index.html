@@ -1,6 +1,78 @@
 <html>
 	<script src="js/m3u.js" type="text/javascript"></script>
-<body>
+	<style type="text/css">
+		#test audio {
+			width: 100%;
+		}
+		#test > label {
+			display: block;
+			float: right;
+			margin: 0.5em;
+		}
+		#test > label:after {
+			content: ".";
+			display: block;
+			height: 0;
+			clear: both;
+			visibility: hidden;
+		}
+		#test .control {
+			float: left;
+		}
+		ol.playlist {
+			width: 100%;
+			display: table;
+			padding: 10px;
+		}
+		div.control {
+			display: block;
+			width: 100%;
+			text-align: center
+		}
+		div.control * {
+			height: 2em;
+			line-height: 2em;
+		}
+		div.control a {
+			display: block;
+			width: 2em;
+			height: 2em;
+			line-height: 2em;
+			border: 3px solid #777;
+			border-radius: 15px;
+			background-color: #000;
+			text-align: center;
+			font-weight: bold;
+			color: #fff;
+			text-decoration: none;
+		}
+		div.control a:first-child {
+			float: left;
+		}
+		div.control a:last-child {
+			float: right;
+		}
+		ol.playlist li {
+			display: table-row;
+			cursor: hand;
+		}
+		ol.playlist li:nth-child(odd) {
+			background-color: #eee;
+		}
+		ol.playlist li.active {
+			background-color: #aea;
+			cursor: inherit;
+		}
+		ol.playlist span {
+			display: table-cell;
+		}
+		ol.playlist span.feed {
+			color: #222;
+			display: inline-block;
+		}
+
+	</style>
+<body onload="m3u('test','relative.m3u',true)">
 	<h1>Podcast-Aggregation</h1>
 	<p>Ziel ist eine serverseitige Aggregation von Podcasts und ein Streamen zu beliebigen Clients. Quellcode gibt es auf <a href="https://github.com/DrAzraelTod/podcatcher.sh">GitHub</a>.
 		
@@ -12,14 +84,13 @@
 			<li><a href="./absolute.m3u">Absolut</a></li>
 		</ul>
 	</p>
-	<p>Player starten
+	<div id="test">
+	</div>
+	<p>Player-Modus wechseln:
 		<ul>
 			<li><a onclick="m3u('test', 'relative.m3u', true)" href="#">einzelne Datei laden</a></li>
 			<li><a onclick="m3u('test', 'relative.m3u', false)" href="#">alle Dateien laden</a></li>
 		</ul>
 	</p>
-	<div id="test">
-
-	</div>
 </body>
 </html>
