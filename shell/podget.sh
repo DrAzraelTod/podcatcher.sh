@@ -58,6 +58,7 @@ err_libc6notinstalled=51
     -r --recent <count>          Download only the <count> newest items from 
                                  each feed.
     --serverlist <list>          Serverlist to use.
+    -i --ignore-downloads        dont download, mark everything as allready downloaded
     -s --silent                  Run silently (for cron jobs).
     -v                           Set verbosity to level 1.
     --verbosity <LEVEL>          Set verbosity level (0-4).
@@ -163,7 +164,7 @@ date_format=+%m-%d-%Y
 #   -nH           No host directories (overrides .wgetrc defaults if necessary)
 #   --proxy=off   To disable proxy set by environmental variable http_proxy/
 #wget_baseopts=-c --proxy=off
-wget_baseopts=-c -nH
+wget_baseopts=-c -S -nH
 
 # Most Recent
 # 0  == download all new items.
@@ -206,6 +207,7 @@ min_space=614400
 # 0 == do not create
 # 1 == create
 asx_playlist=0
+ignore_downloads=0
 TEXT_DEFAULT_CONFIG
 
 : << TEXT_DEFAULT_SERVERLIST
@@ -262,6 +264,7 @@ while [ $# -ge 1 ] ; do
              --import_pcast ) import_pcast=$2            ; shift ; shift ;;
         -l | --library      ) cmdl_library=$2            ; shift ; shift ;;
         -p | --playlist-asx ) cmdl_asx=1                 ; shift ;       ;;
+        -i | --ignore-downloads ) ignore_downloads=1	 ; shift ; shift ;;
         -r | --recent       ) most_recent=$2             ; shift ; shift ;;
              --serverlist   ) cmdl_serverlist=$2         ; shift ; shift ;;
         -s | --silent       ) silent=1                   ; shift         ;;
@@ -574,13 +577,16 @@ if [ $cleanup_only -eq 0 ] && [ -z $import_opml ] && [ -z $import_pcast ] ; then
                             echo -e "\nDownloading $url_filename from $url_base"
                         fi
                         
-                        if [ $modify_filename -gt 0 ] || [ $filename_formatfix -gt 0 ] ; then
-                            wget $wget_options -O "$dir_library/$feed_category/$feed_name/$mod_filename" $url
-                        else
-                            wget $wget_options -P "$dir_library/$feed_category/$feed_name/" $url
-                        fi
+			if [ $ignore_downloads -le 0 ] ; then
+	                        if [ $modify_filename -gt 0 ] || [ $filename_formatfix -gt 0 ] ; then
+	                            wget $wget_options -O "$dir_library/$feed_category/$feed_name/$mod_filename" $url
+	                        else
+	                            wget $wget_options -P "$dir_library/$feed_category/$feed_name/" $url
+	                        fi
+			fi
                         
                         if [ $? ] ; then
+#			    touch "$dir_library/$feed_category/$feed_name/$mod_filename" -d;
                             echo $url >> $dir_log/$log_comp
                             if [ -n "$playlist_name" ] ; then
                                 if [ $modify_filename -gt 0 ] ; then

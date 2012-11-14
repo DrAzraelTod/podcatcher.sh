@@ -16,6 +16,6 @@ find . -type f \
         -and -not -path "*/.git/*" \
 	-and -not -name "*.sh" \
 	-and -not -name "*.md" \
-	> "$list.m3u"
+	> "$list.m3u" -exec ls -1rt "{}" +;
 wc -l "$list.m3u"
 popd 2>&1 >/dev/null
