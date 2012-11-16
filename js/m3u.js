@@ -1,6 +1,7 @@
 var m3u = function(targetID, m3uPath, sequential) {
 	m3u.files;
 	m3u.current_file = 0;
+	m3u.dates = [];
 
 	m3u.parse = function(data, status) {
 		files = data.split('\n');
@@ -35,6 +36,10 @@ var m3u = function(targetID, m3uPath, sequential) {
 					inner = '<span class="feed">'+feed+'</span>';
 				}
 				inner += '<span class="episode">'+this.getFilename(j)+'</span>';
+				date = this.dates[files[j]];
+                                if (date) {
+                                	inner += '<span class="date">'+date+'</span>';
+                                }
 				if (i==j) {
 					text += '<li class="active">'+inner+'</li>';
 				} else {
@@ -125,6 +130,7 @@ var m3u = function(targetID, m3uPath, sequential) {
 		http.open('HEAD', url, false);
 		http.send();
 		if (http.status==404) return false;
+		this.dates[url] = http.getResponseHeader('Last-Modified');
 		return http.getResponseHeader('content-type');
 	}
 //	var request = jQuery.ajax('relative.m3u', {'success' : parse});
