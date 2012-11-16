@@ -4,12 +4,13 @@
 		#test audio {
 			width: 100%;
 		}
-		#test > label {
-			display: block;
-			float: right;
+		#player > label {
+			display: inline-block;
 			margin: 0.5em;
+			width: 100%;
+			text-align: center;
 		}
-		#test > label:after {
+		#player > label:after {
 			content: ".";
 			display: block;
 			height: 0;
@@ -77,6 +78,18 @@
 		}
 		ol.playlist span.date {
 			text-align: right;
+		}
+		div#player {
+			position: fixed;
+			bottom: 0px;
+			background-color: #CCC;
+			padding: 10px 0px;
+			right: 0px;
+			margin: 0px;
+			border-top-left-radius: 10px;
+			border-top-right-radius: 10px;
+			width: 100%;
+			text-align: center;
 		}
 
 	</style>

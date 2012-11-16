@@ -7,13 +7,13 @@ var m3u = function(targetID, m3uPath, sequential) {
 		files = data.split('\n');
 		var target = document.getElementById(targetID);
 		if (sequential) {
-			target.innerHTML = this.drawOne(this.current_file)+this.drawControls(this.current_file);
+			target.innerHTML = '<div id="player">'+this.drawOne(this.current_file)+this.drawControls(this.current_file, true);
 		} else {
 			target.innerHTML = this.drawAll();
 		}
 
 	}
-	m3u.drawControls = function(i) {
+	m3u.drawControls = function(i, extraDivEnd) {
 		var text = '<div class="control">'; 
 		if (i > 0) {
                         text +='<a href="#" onclick="m3u.gotoFile('+(i-1)+')">&lt;</a>';
@@ -23,6 +23,9 @@ var m3u = function(targetID, m3uPath, sequential) {
                         text += '<a href="#" onclick="m3u.gotoFile('+(i+1)+')">&gt;</a>';
                 }
 		text += '</div>';
+		if (extraDivEnd) {
+			text += '</div>';
+		}
 		text += this.drawList(i);
 		return text;
 	}
@@ -70,7 +73,7 @@ var m3u = function(targetID, m3uPath, sequential) {
 		this.current_file = i;
 		this.cleanupFiles();
 		var target = document.getElementById(targetID);
-                target.innerHTML = this.drawOne(this.current_file)+this.drawControls(this.current_file);
+                target.innerHTML =  '<div id="player">'+this.drawOne(this.current_file)+this.drawControls(this.current_file, true);
 		var player = document.getElementById('media_'+i);
 		if (player) {
 			if (i+1 < files.length) {
