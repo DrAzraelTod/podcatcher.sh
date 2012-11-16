@@ -39,7 +39,9 @@ var m3u = function(targetID, m3uPath, sequential) {
 				date = this.dates[files[j]];
                                 if (date) {
                                 	inner += '<span class="date">'+date+'</span>';
-                                }
+                                } else {
+					inner += '<span class="empty" />';
+				}
 				if (i==j) {
 					text += '<li class="active">'+inner+'</li>';
 				} else {
