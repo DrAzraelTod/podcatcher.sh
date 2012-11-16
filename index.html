@@ -55,6 +55,7 @@
 		ol.playlist li {
 			display: table-row;
 			cursor: hand;
+			line-height: 42px;
 		}
 		ol.playlist li:nth-child(odd) {
 			background-color: #eee;
@@ -65,19 +66,41 @@
 		}
 		ol.playlist span {
 			display: table-cell;
+			text-align: center;
+		}
+		ol.playlist span.feed, ol.playlist span.date {
+			color: #555;
+			font-size: 0.8em;
 		}
 		ol.playlist span.feed {
-			color: #555;
+			text-align: left;
+		}
+		ol.playlist span.date {
+			text-align: right;
 		}
 
 	</style>
 	<style media="only screen and (max-device-width: 640px)" type="text/css">
 		ol.playlist {
-			display: inherit;
+			display: inline;
 		}
 		ol.playlist li {
-			display: inherit;
+			display: list-item;
 		}
+		ol.playlist li span {
+			display: block;
+			float: left;
+		}
+		ol.playlist li span.episode {
+			float: right;
+		}
+                ol.playlist li:after {
+                        content: ".";
+                        display: block;
+                        height: 0;
+                        clear: both;
+                        visibility: hidden;
+                }
 		ol.playlist li span.empty {
 			display: none;
 		}
