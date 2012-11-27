@@ -2,10 +2,12 @@ var m3u = function(targetID, m3uPath, sequential) {
 	m3u.files;
 	m3u.current_file = 0;
 	m3u.dates = [];
+	m3u.sizes = [];
 
 	m3u.parse = function(data, status) {
 		files = data.split('\n');
 		var target = document.getElementById(targetID);
+		this.testAllURLs();
 		if (sequential) {
 			target.innerHTML = '<div id="player">'+this.drawOne(this.current_file)+this.drawControls(this.current_file, true);
 		} else {
@@ -40,10 +42,16 @@ var m3u = function(targetID, m3uPath, sequential) {
 				}
 				inner += '<span class="episode">'+this.getFilename(j)+'</span>';
 				date = this.dates[files[j]];
+				size = this.sizes[files[j]];
                                 if (date) {
-                                	inner += '<span class="date">'+date+'</span>';
+                                	inner += '<span class="date data">'+date+'</span>';
                                 } else {
-					inner += '<span class="empty" />';
+					inner += '<span class="empty"></span>';
+				}
+				if (size) {
+					inner += '<span class="size data">'+Math.round((size/(1024*1024)*10))/10+' MB</span>';
+				} else {
+					inner += '<span class="empty"></span>';
 				}
 				if (i==j) {
 					text += '<li class="active">'+inner+'</li>';
@@ -130,12 +138,18 @@ var m3u = function(targetID, m3uPath, sequential) {
 		text += '</a></label>';
 		return text;
 	}
+	m3u.testAllURLs = function(url) {
+		for (var i=0; i<files.length;i++) {
+			this.testURL(files[i]);
+		}
+	}
 	m3u.testURL = function(url) {
 		var http = new XMLHttpRequest();
 		http.open('HEAD', url, false);
 		http.send();
 		if (http.status==404) return false;
 		this.dates[url] = http.getResponseHeader('Last-Modified');
+		this.sizes[url] = http.getResponseHeader('Content-Length');
 		return http.getResponseHeader('content-type');
 	}
 //	var request = jQuery.ajax('relative.m3u', {'success' : parse});

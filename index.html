@@ -76,7 +76,7 @@
 		ol.playlist span.feed {
 			text-align: left;
 		}
-		ol.playlist span.date {
+		ol.playlist span.data {
 			text-align: right;
 		}
 		div#player {
@@ -106,6 +106,16 @@
 		}
 		ol.playlist li span.episode {
 			float: right;
+		}
+		ol.playlist li span.size {
+			float: right;
+		}
+		ol.playlist li span.size:after {
+			content: "";
+			height: 0;
+			display: block;
+			clear: right;
+			visibility: hidden;
 		}
                 ol.playlist li:after {
                         content: ".";
