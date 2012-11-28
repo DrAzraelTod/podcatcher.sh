@@ -9,7 +9,7 @@ rm ./*.m3u
 #mv musik/AVICII\ -\ LEVELS\ PODCAST/ musik/AVICII
 #mv ÖR/IQ\ -\ Wissenschaft\ und\ Forschung\ -\ Bayern\ 2 ÖR/IQ\ -\ Wissenschaft\ und\ Forschung
 m3u.sh . relative;
-tar -pczf export.tgz sonst ccc ÖR game Comedy relative.m3u
+tar -pczf export.tgz sonst musik ccc ÖR game Comedy relative.m3u
 rmdir ./*/* 2>/dev/null;
 sed -e "s/.\//http:\/\/g33ky.de\/static\/podcasts\//" relative.m3u > absolute.m3u;
 cat absolute.m3u;

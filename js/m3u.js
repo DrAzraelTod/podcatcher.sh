@@ -9,7 +9,7 @@ var m3u = function(targetID, m3uPath, sequential) {
 		var target = document.getElementById(targetID);
 		this.testAllURLs();
 		if (sequential) {
-			target.innerHTML = '<div id="player">'+this.drawOne(this.current_file)+this.drawControls(this.current_file, true);
+			target.innerHTML = '<div id="player">'+this.drawOne(this.current_file, true)+this.drawControls(this.current_file, true);
 		} else {
 			target.innerHTML = this.drawAll();
 		}
@@ -81,7 +81,7 @@ var m3u = function(targetID, m3uPath, sequential) {
 		this.current_file = i;
 		this.cleanupFiles();
 		var target = document.getElementById(targetID);
-                target.innerHTML =  '<div id="player">'+this.drawOne(this.current_file)+this.drawControls(this.current_file, true);
+                target.innerHTML =  '<div id="player">'+this.drawOne(this.current_file, true)+this.drawControls(this.current_file, true);
 		var player = document.getElementById('media_'+i);
 		if (player) {
 			if (i+1 < files.length) {
@@ -99,7 +99,7 @@ var m3u = function(targetID, m3uPath, sequential) {
 		if (parts.length < 2) return false;
                 return parts[parts.length-2];
         }
-	m3u.drawOne = function(i) {
+	m3u.drawOne = function(i, current) {
 
 		var url = files[i];
                 if (url) {
@@ -110,7 +110,7 @@ var m3u = function(targetID, m3uPath, sequential) {
 //                      }
                         var type = this.testURL(url);
                         if(type) {
-                        	return this.getPlayerText(url, name, type, i);
+                        	return this.getPlayerText(url, name, type, i, current);
                         } else {
 				files[i] = false;
 				if (i<files.length-1) {
@@ -122,17 +122,18 @@ var m3u = function(targetID, m3uPath, sequential) {
 	m3u.drawAll = function() {
                 var text = '<ul>';
                 for (var i=0;i<files.length;i++) {
-                	text += '<li>'+this.drawOne(i)+'</li>';
+                	text += '<li>'+this.drawOne(i, false)+'</li>';
                 }
 		text += '</ul>';
 		return text;
 	}
-	m3u.getPlayerText = function(url, name, type, id) {
+	m3u.getPlayerText = function(url, name, type, id, autoload) {
 		var tag = (type.substring(0,5).toLowerCase() == 'video') ? 'video' : 'audio';
 		var text;
-		text = '<'+tag+' id="media_'+id+'" controls="controls">';
+		text = '<'+tag+' id="media_'+id+'" controls="controls" onerror="m3u.error(event);">';
+		var  autoload = autoload ? 'auto' : 'metadata';
 		text += '<source src="'+url+'" type="'+type+'" ';
-		text += 'preload="metadata" /></'+tag+'>';
+		text += 'preload="'+autoload+'" /></'+tag+'>';
 		text += '<label><a href="'+url+'" target="_blank">';
 		text += name;
 		text += '</a></label>';
@@ -141,6 +142,27 @@ var m3u = function(targetID, m3uPath, sequential) {
 	m3u.testAllURLs = function(url) {
 		for (var i=0; i<files.length;i++) {
 			this.testURL(files[i]);
+		}
+	}
+	m3u.error = function(e) {
+		this.lastError = e;
+		console.log(e);
+		switch (e.target.error.code) {
+			case e.target.error.MEDIA_ERR_ABORTED:
+				// kein Fehler
+			break;
+			case e.target.error.MEDIA_ERR_NETWORK:
+				alert('A network error caused the video download to fail part-way.');
+			break;
+			case e.target.error.MEDIA_ERR_DECODE:
+				alert('The video playback was aborted due to a corruption problem or because the video used features your browser did not support.');
+			break;
+			case e.target.error.MEDIA_ERR_SRC_NOT_SUPPORTED:
+				alert('The video could not be loaded, either because the server or network failed or because the format is not supported.');
+			break;
+			default:
+				alert('An unknown error occurred.');
+			break;
 		}
 	}
 	m3u.testURL = function(url) {
