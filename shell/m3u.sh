@@ -19,4 +19,5 @@ find . -type f \
 	-and -not -name "*.tgz" \
 	> "$list.m3u" -exec ls -1rt "{}" +;
 wc -l "$list.m3u"
+sed -i 's/ /%20/g' "$list.m3u"
 popd 2>&1 >/dev/null
