@@ -78,6 +78,11 @@ var m3u = function(targetID, m3uPath, sequential) {
 		files = fn;
 	}
 	m3u.gotoFile = function(i) {
+		var volume = 1.0;
+		var old = document.getElementById('player');
+		if (old) {
+			volume = old.children[0].volume;
+		}
 		this.current_file = i;
 		this.cleanupFiles();
 		var target = document.getElementById(targetID);
@@ -87,6 +92,7 @@ var m3u = function(targetID, m3uPath, sequential) {
 			if (i+1 < files.length) {
 				player.addEventListener('ended', function() {m3u.gotoFile(i+1)});
 			}
+			player.volume = volume;
 			player.play();
 		}
 	}
