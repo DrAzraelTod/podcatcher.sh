@@ -1,4 +1,4 @@
 #!/bin/bash
-podget >&1;
+podget --verbosity 1 >&1;
 f=`dirname "$0"`;
-$f/update_playlists.sh >&1;
+$f/update_playlists.sh >/dev/null;

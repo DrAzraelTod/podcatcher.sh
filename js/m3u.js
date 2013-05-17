@@ -78,11 +78,15 @@ var m3u = function(targetID, m3uPath, sequential) {
 		files = fn;
 	}
 	m3u.gotoFile = function(i) {
-		var volume = 1.0;
+		var volume = get_cookie('volume');
+                if (volume == 0) volume = 1;
 		var old = document.getElementById('player');
 		if (old) {
 			volume = old.children[0].volume;
 		}
+		if (volume < 1.0) {
+                  set_cookie('volume',volume,60,document.location.hostname);
+                }
 		this.current_file = i;
 		this.cleanupFiles();
 		var target = document.getElementById(targetID);
@@ -134,6 +138,9 @@ var m3u = function(targetID, m3uPath, sequential) {
 		return text;
 	}
 	m3u.getPlayerText = function(url, name, type, id, autoload) {
+		if (type === "application/octet-stream" && url.substring(url.length-4) == "opus") {
+			type = "audio/ogg; codecs=opus";
+		}
 		var tag = (type.substring(0,5).toLowerCase() == 'video') ? 'video' : 'audio';
 		var text;
 		text = '<'+tag+' id="media_'+id+'" controls="controls" onerror="m3u.error(event);">';
@@ -190,3 +197,42 @@ var m3u = function(targetID, m3uPath, sequential) {
 		m3u.parse(request.responseText, request.status);
 	}
 }
+// Lib-Stuff-Tolls-Shit-Things
+
+function set_cookie ( cookie_name, cookie_value, lifespan_in_days, valid_domain )
+{
+    var domain_string = valid_domain ? ("; domain=" + valid_domain) : '' ;
+    document.cookie = cookie_name +
+                       "=" + encodeURIComponent( cookie_value ) +
+                       "; max-age=" + 60 * 60 *
+                       24 * lifespan_in_days +
+                       "; path=/" + domain_string ;
+}
+/*
+function get_cookie ( cookie_name )
+{
+    var cookie_string = document.cookie;
+    if (cookie_string.length != 0) {
+        var cookie_value = cookie_string.match (
+                        '(^|;)[\s]*' +
+                        cookie_name +
+                        '=([^;]*)' );
+        return decodeURIComponent ( cookie_value[2] );
+    }
+    return '';
+}*/
+function get_cookie(c_name)
+{
+  if (document.cookie.length>0)
+  {
+    c_start=document.cookie.indexOf(c_name + "=");
+    if (c_start!=-1)
+    {
+      c_start=c_start + c_name.length+1;
+      c_end=document.cookie.indexOf(";",c_start);
+      if (c_end==-1) c_end=document.cookie.length;
+      return unescape(document.cookie.substring(c_start,c_end));//returns the cookie after decoding
+    }
+  }
+  return "";
+} 
