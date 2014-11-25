@@ -19,4 +19,5 @@ sed -e "s/.\//http:\/\/g33ky.de\/static\/podcasts\//" relative.m3u > absolute.m3
 cat absolute.m3u;
 echo  -n 'Gefundene feeds:';
 grep -c '\n' absolute.m3u;
+du -hd1 | egrep -v "\./\.LOG|\./shell|/\.git|\./js";
 popd;

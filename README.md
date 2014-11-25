@@ -5,7 +5,7 @@ a podcast-aggregator and access to that data (currently mostly html5/m3u)
 
 ## RSS/Atom-Parsing
 
-... is currently done by [podget](http://podget.sourceforge.net/) (GPL Podcast Downloader, shell script)
+… is currently done by [podget](http://podget.sourceforge.net/) (GPL Podcast Downloader, shell script)
 sadly the output of m3u-files didn't work ootb, so i included my own script for that and delete those of podget with every run.
 In the future i will hopefully adapt the original script to do some more things (like additional output-formats)
 
