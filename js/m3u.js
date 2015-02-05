@@ -24,6 +24,7 @@ var m3u = function(targetID, m3uPath, sequential) {
 		if (i < files.length-1) {
                         text += '<a href="#" onclick="m3u.gotoFile('+(i+1)+')">&gt;</a>';
                 }
+                text += '<input type="range" name="speed" min="0.5" max="2.5" step="0.1" value="1.0" onchange="m3u.setSpeed(this.value)">'
 		text += '</div>';
 		if (extraDivEnd) {
 			text += '</div>';
@@ -31,6 +32,11 @@ var m3u = function(targetID, m3uPath, sequential) {
 		text += this.drawList(i);
 		return text;
 	}
+        m3u.setSpeed = function(speed) {
+           var f = document.getElementsByTagName("audio")[0];
+           if (f == undefined) {f = document.getElementsByTagName("video")[0];}
+           f.playbackRate = speed;
+        }
 	m3u.drawList = function(i) {
 		var text = '<ol class="playlist">'
 		for (var j=0;j<files.length;j++) {
@@ -98,6 +104,7 @@ var m3u = function(targetID, m3uPath, sequential) {
 			}
 			player.volume = volume;
 			player.play();
+                        player.playbackRate = 1.0
 		}
 	}
 	m3u.getFilename = function(i) {
