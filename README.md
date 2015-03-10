@@ -16,7 +16,7 @@ Since that isn't working everywhere (i'm looking at you android!), i built some 
 
 ## Does it work?
 
-Well.. some of it does. Testpage is aviable at [podcasts.g33ky.de](http://podcasts.g33ky.de/).
+Well.. some of it does. Testpage is aviable at [podcast.g33ky.de](http://podcast.g33ky.de/).
 
 ## TODO
 
