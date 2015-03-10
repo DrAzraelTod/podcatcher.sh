@@ -16,7 +16,7 @@ Since that isn't working everywhere (i'm looking at you android!), i built some 
 
 ## Does it work?
 
-Well.. some of it does. Testpage is aviable at [g33ky.de/static/podcasts](http://g33ky.de/static/podcasts/).
+Well.. some of it does. Testpage is aviable at [podcasts.g33ky.de](http://podcasts.g33ky.de/).
 
 ## TODO
 
@@ -26,9 +26,13 @@ at podget:
 
 at client:
 * somehow remember what has been listened
-* better support different formats
+* better support different formats - well most formats "kinda" work now, but ogg-opus-support is buttugly
 * sequential download/play of one file after another ([x] done)
+* fix video-sizing, even better: redo the whole layout completely
+* fix cookie-support
+* remember current position of playback
+* show numeric playback-speed, remember speed for different podcasts
 
 other:
 * do something python/golang
-* mayhaps create android-client
+* mayhaps create android/ios-client
