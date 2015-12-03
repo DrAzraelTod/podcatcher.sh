@@ -1,0 +1,28 @@
+// OS-generated files (OS X)
+.DS_Store
+.Spotlight-V100
+.Trashes
+._*
+
+// Ownclown
+.csync_journal.db-*
+.owncloudsync.log
+
+// OS-generated files (Windows)
+desktop.ini
+ehthumbs.db
+Thumbs.db
+
+// BTSync files
+.sync
+*.bts
+*.!Sync
+.SyncID
+.SyncIgnore
+.SyncArchive
+*.SyncPart
+*.SyncTemp
+*.SyncOld
+
+// Synology files
+@eaDir
